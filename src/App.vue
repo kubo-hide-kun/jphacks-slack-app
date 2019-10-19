@@ -1,11 +1,12 @@
 <template>
   <v-app>
     <v-app-bar app class="purple darken-4">
+ 
+      <v-toolbar-title class="headline white--text center--text">
 
-      <v-toolbar-title class="headline text-uppercase">
-        <span>       Slack Rain</span>
+        <span> Slack Rain</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+    
 
     </v-app-bar>
 
