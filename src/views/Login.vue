@@ -10,7 +10,7 @@
         column
         justify-center
       >
-        <h1 class="display-2 font-weight-thin mb-4">Slack Rain</h1>
+        <h1 class="display-2 font-weight-thin mb-3 mt-3">Slack Rain</h1>
 
 
 
@@ -26,8 +26,9 @@
         label="Pass"
         required
       ></v-text-field-->
-    <input type="text" placeholder="Username" v-model="username">
-    <input type="password" placeholder="Password" v-model="password">
+    <input type="text" placeholder="Username" v-model="username" class="pa-5 border">
+   
+    <input type="password" placeholder="Password" v-model="password" class="pa-5 border">
 
       <v-checkbox
         v-model="checkbox"
@@ -56,8 +57,8 @@
         label="Pass"
         required
       ></v-text-field-->
-    <input type="text" placeholder="Username" v-model="username">
-    <input type="password" placeholder="Password" v-model="password">
+    <input type="text" placeholder="Username" v-model="username" class="border2 pa-5">
+    <input type="password" placeholder="Password" v-model="password" class="border2 pa-5">
 
 
       <v-checkbox
@@ -126,8 +127,8 @@ export default {
       checkbox: '',
       dialog: false,
       items: [
-        {color: 'red lighten-2', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！'},
-        {color: 'purple darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！'},
+        {color: 'light-blue darken-4', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！'},
+        {color: 'light-blue darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！'},
       ],
     };
   },
@@ -162,7 +163,19 @@ export default {
 .form {
   border-radius: 20px 20px 20px 20px;
   background-color: rgba(255,255,255,0.5);
-  height: 350px;
+  height: 320px;
   box-shadow: 0px 0px 0px gray;
+}
+.border{
+  border: solid 1px #E1F5FE;
+  border-radius: 40px 40px 40px 40px;
+  width:100%;
+  margin:5px;
+}
+.border2{
+  border: solid 1px #B3E5FC;
+  border-radius: 40px 40px 40px 40px;
+  width:100%;
+  margin:5px;
 }
 </style>
