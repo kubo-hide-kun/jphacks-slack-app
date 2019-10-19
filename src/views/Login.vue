@@ -15,17 +15,19 @@
 
 
  <form class="form pa-10">
-      <v-text-field
-        v-model="ID"
-        :counter="10"
-        label="ID"
+      <!--v-text-field
+        v-model="email"
+        :counter="20"
+        label="email"
         required
       ></v-text-field>
       <v-text-field
-        v-model="email"
+        v-model="Pass"
         label="Pass"
         required
-      ></v-text-field>
+      ></v-text-field-->
+    <input type="text" placeholder="Username" v-model="username">
+    <input type="password" placeholder="Password" v-model="password">
 
       <v-checkbox
         v-model="checkbox"
@@ -43,17 +45,20 @@
         <v-card class="pa-10">
         <v-card-title class="headline">Create Acount</v-card-title>
 
-      <v-text-field
-        v-model="name"
-        :counter="10"
-        label="ID"
+      <!--v-text-field
+        v-model="email"
+        :counter="20"
+        label="email"
         required
       ></v-text-field>
       <v-text-field
-        v-model="email"
+        v-model="Pass"
         label="Pass"
         required
-      ></v-text-field>
+      ></v-text-field-->
+    <input type="text" placeholder="Username" v-model="username">
+    <input type="password" placeholder="Password" v-model="password">
+
 
       <v-checkbox
         v-model="checkbox"
@@ -106,12 +111,14 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
-import firebase from 'firebase/app'
+import firebase from '@firebase/app'; require('firebase/auth'); 
 export default {
   name: 'Sign',
   data(){
     return {
       $v: '',
+      Pass: '',
+      ID: '',
       username: '',
       password: '',
       email: '',
