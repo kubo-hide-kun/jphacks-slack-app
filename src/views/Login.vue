@@ -12,8 +12,6 @@
       >
         <h1 class="display-2 font-weight-thin mb-4">Slack Rain</h1>
 
-
-
  <form class="form pa-10">
       <v-text-field
         v-model="name"
@@ -135,7 +133,6 @@ items: [
 
   }),
 };
-
 
 </script>
 <style scoped>
