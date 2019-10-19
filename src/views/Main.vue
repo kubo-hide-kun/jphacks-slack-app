@@ -1,6 +1,7 @@
 <template>
 <div id="app">
   <v-app id="inspire">
+    <DatePicker v-if="isRestForm"/>
     <div class="p">
       <v-card id="create">
         <v-speed-dial 
@@ -19,6 +20,7 @@
             color="blue darken-2"
             dark
             fab
+            v-on:click = "isRestForm = false"
           >
           <v-icon v-if="fab">mdi-close</v-icon>
           <v-icon v-else>mdi-account-circle</v-icon>
@@ -28,15 +30,8 @@
         fab
         dark
         small
-        color="green"
-      >
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-      <v-btn
-        fab
-        dark
-        small
         color="indigo"
+        v-on:click = "isRestForm = true"
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -58,12 +53,20 @@
 
 <script>
 // @ is an alias to /src
+import DatePicker from '../components/DatePicker'
+
 export default {
       transition: 'slide-y-reverse-transition',
-      direction: 'top',
-       fab: false,
+  direction: 'top',
+  fab: false,
 
-computed: {
+  data() {
+    return {
+      isRestForm: false
+    };
+  },
+
+  computed: {
     activeFab () {
       switch (this.tabs) {
         case 'one': return { class: 'purple', icon: 'account_circle' }
@@ -73,6 +76,14 @@ computed: {
       }
     },
   },
+  components: {
+    DatePicker
+  },
+  methods: {
+    leaveRestForm() {
+      this.isRestForm = false;
+    }
+  }
 }
 </script>
 <style scoped>
