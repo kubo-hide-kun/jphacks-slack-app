@@ -2,36 +2,16 @@
   <v-app>
     <v-app-bar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span>Slack Rain</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+
     </v-app-bar>
-
-    <v-content>
-    <Login/>
-
-    </v-content>
-  </v-app>
+      <transition name="page">
+        <router-view/>
+      </transition>
+    </v-app>
 </template>
 
 <script>
-import Login from './views/Login.vue';
-
-export default {
-  name: 'App',
-  components: {
-    Login,
-  },
-  data: () => ({
-    //
-  }),
-};
 </script>

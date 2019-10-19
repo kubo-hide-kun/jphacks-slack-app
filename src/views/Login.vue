@@ -16,67 +16,49 @@
 
  <form class="form pa-10">
       <v-text-field
-        v-model="name"
-        :error-messages="nameErrors"
+        v-model="ID"
         :counter="10"
         label="ID"
         required
-        @input="$v.name.$touch()"
-        @blur="$v.name.$touch()"
       ></v-text-field>
       <v-text-field
         v-model="email"
-        :error-messages="emailErrors"
         label="Pass"
         required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
       ></v-text-field>
 
       <v-checkbox
         v-model="checkbox"
-        :error-messages="checkboxErrors"
         label="Do you agree?"
         required
-        @change="$v.checkbox.$touch()"
-        @blur="$v.checkbox.$touch()"
       ></v-checkbox>
   
-      <v-btn class="mr-4" @click="submit">Login</v-btn>
+      <v-btn class="mr-4" @click="signIn">Login</v-btn>
 
 
       <v-dialog v-model="dialog" persistent max-width="290">
         <template v-slot:activator="{ on }">
-          <v-btn @click="clear" dark v-on="on">Create</v-btn>
+          <v-btn @click="signUp" dark v-on="on">Create</v-btn>
         </template>
         <v-card class="pa-10">
         <v-card-title class="headline">Create Acount</v-card-title>
 
       <v-text-field
         v-model="name"
-        :error-messages="nameErrors"
         :counter="10"
         label="ID"
         required
-        @input="$v.name.$touch()"
-        @blur="$v.name.$touch()"
       ></v-text-field>
       <v-text-field
         v-model="email"
-        :error-messages="emailErrors"
         label="Pass"
         required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
       ></v-text-field>
 
       <v-checkbox
         v-model="checkbox"
-        :error-messages="checkboxErrors"
         label="Do you agree?"
         required
-        @change="$v.checkbox.$touch()"
-        @blur="$v.checkbox.$touch()"
       ></v-checkbox>
 
 
@@ -96,7 +78,7 @@
     </v-parallax>
 
    <div>
-      <v-timeline :reverse="reverse" :dense="$vuetify.breakpoint.smAndDown">
+      <v-timeline :dense="$vuetify.breakpoint.smAndDown">
         <v-timeline-item
         v-for="(item, i) in items"
         :key="i"
@@ -124,13 +106,25 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
+import firebase from 'firebase/app'
 export default {
-
-  name: 'Signup',
-  return: {
-    username: '',
-    password: ''
+  name: 'Sign',
+  data(){
+    return {
+      $v: '',
+      username: '',
+      password: '',
+      email: '',
+      name: '',
+      checkbox: '',
+      dialog: false,
+      items: [
+        {color: 'red lighten-2', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！'},
+        {color: 'purple darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！'},
+      ],
+    };
   },
+
   methods: {
     signUp: function(){
       firebase.auth().createUserWithEmailAndPassword(this.username, this.password)
@@ -140,16 +134,19 @@ export default {
       .catch(error => {
         alert(error.message)
       })
-   }
- },
-
-  data:()=>({
-    dialog: false,
-    items: [
-      {color: 'red lighten-2', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！'},
-      {color: 'purple darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！'},
-    ],
-  }),
+   },
+    signIn: function () {
+      firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
+        user => {// eslint-disable-line
+          alert('Success!')
+          this.$router.push('/')
+        },
+        err => {
+          alert(err.message)
+        }
+      )
+    } 
+ }
 };
 
 

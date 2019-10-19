@@ -8,17 +8,15 @@ import firebase from 'firebase/app'
 Vue.config.productionTip = false
 
 const config = {
-    apiKey: "AIzaSyCsvFrlF2MNpZEOUV48dO4lOTYiAZQzJsg",
-    authDomain: "jphacks-6a562.firebaseapp.com",
-    databaseURL: "https://jphacks-6a562.firebaseio.com",
-    projectId: "jphacks-6a562",
-    storageBucket: "jphacks-6a562.appspot.com",
-    messagingSenderId: "85468317597",
-    appId: "1:85468317597:web:fb90eab2568018225c9174",
-    measurementId: "G-B4RZE8XJYC"
-};
-firebase.initializeApp(config);
+  apiKey: "AIzaSyB_C233N_7cIqAPAE-reEnzdD2R0w9jzdo",
+  authDomain: "conoha-60071.firebaseapp.com",
+  databaseURL: "https://conoha-60071.firebaseio.com",
+  projectId: "conoha-60071",
+  storageBucket: "conoha-60071.appspot.com",
+  messagingSenderId: "98838455718"
+}
 
+firebase.initializeApp(config);
 
 new Vue({
   router,
