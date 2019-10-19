@@ -1,0 +1,2 @@
+#Slackbotのプログラム
+ローカル環境でnpm startしたら動いて　Slackでも使える
