@@ -16,32 +16,32 @@
       >
       <template v-slot:item.today="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWeatherIcon(item.today) }}</v-icon>
+          <v-icon :color="getWeatherColor(item.today)">{{ getWeatherIcon(item.today) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayOne="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWeatherIcon(item.dayOne) }}</v-icon>
+          <v-icon :color="getWeatherColor(item.dayOne)">{{ getWeatherIcon(item.dayOne) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayTwo="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWeatherIcon(item.dayTwo) }}</v-icon>
+          <v-icon :color="getWeatherColor(item.dayTwo)">{{ getWeatherIcon(item.dayTwo) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayThree="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWeatherIcon(item.dayThree) }}</v-icon>
+          <v-icon :color="getWeatherColor(item.dayThree)">{{ getWeatherIcon(item.dayThree) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayFour="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWeatherIcon(item.dayFour) }}</v-icon>
+          <v-icon :color="getWeatherColor(item.dayFour)">{{ getWeatherIcon(item.dayFour) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayFive="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWeatherIcon(item.dayFive) }}</v-icon>
+          <v-icon :color="getWeatherColor(item.dayFive)">{{ getWeatherIcon(item.dayFive) }}</v-icon>
         </v-list-item-icon>
       </template>
       </v-data-table>
@@ -89,7 +89,6 @@
     },
     mounted() {
       this.fetchWeather(0);
-      this.fetchWeather(1);
     },
     methods: {
       getWeatherIcon(whether) {
@@ -99,6 +98,16 @@
             : whether == "Clouds"
             ? `mdi-cloud`
             : `mdi-weather-pouring`
+        );
+      },
+
+      getWeatherColor(whether) {
+        return (
+            whether == "Clear"
+            ? "#ED0254"
+            : whether == "Clouds"
+            ? ""
+            : "#28C9F7"
         );
       },
 
