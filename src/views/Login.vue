@@ -125,14 +125,30 @@
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
 export default {
-  data: () => ({
-dialog: false,
 
-items: [
-  { color: 'red lighten-2', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！',},
-  { color: 'purple darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！',},
-],
+  name: 'Signup',
+  return: {
+    username: '',
+    password: ''
+  },
+  methods: {
+    signUp: function(){
+      firebase.auth().createUserWithEmailAndPassword(this.username, this.password)
+        .then(user => {
+          alert('Create account: ', user.email)
+      })
+      .catch(error => {
+        alert(error.message)
+      })
+   }
+ },
 
+  data:()=>({
+    dialog: false,
+    items: [
+      {color: 'red lighten-2', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！'},
+      {color: 'purple darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！'},
+    ],
   }),
 };
 
