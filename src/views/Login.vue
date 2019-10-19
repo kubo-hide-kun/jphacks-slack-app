@@ -10,71 +10,59 @@
         column
         justify-center
       >
-        <h1 class="display-2 font-weight-thin mb-4">Slack Rain</h1>
+        <h1 class="display-2 font-weight-thin mb-3 mt-3">Slack Rain</h1>
 
  <form class="form pa-10">
-      <v-text-field
-        v-model="name"
-        :error-messages="nameErrors"
-        :counter="10"
-        label="ID"
+      <!--v-text-field
+        v-model="email"
+        :counter="20"
+        label="email"
         required
-        @input="$v.name.$touch()"
-        @blur="$v.name.$touch()"
       ></v-text-field>
       <v-text-field
-        v-model="email"
-        :error-messages="emailErrors"
+        v-model="Pass"
         label="Pass"
         required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
+      ></v-text-field-->
+    <input type="text" placeholder="Username" v-model="username" class="pa-5 border">
+   
+    <input type="password" placeholder="Password" v-model="password" class="pa-5 border">
 
       <v-checkbox
         v-model="checkbox"
-        :error-messages="checkboxErrors"
         label="Do you agree?"
         required
-        @change="$v.checkbox.$touch()"
-        @blur="$v.checkbox.$touch()"
       ></v-checkbox>
   
-      <v-btn class="mr-4" @click="submit">Login</v-btn>
+      <v-btn class="mr-4" @click="signIn">Login</v-btn>
 
 
       <v-dialog v-model="dialog" persistent max-width="290">
         <template v-slot:activator="{ on }">
-          <v-btn @click="clear" dark v-on="on">Create</v-btn>
+          <v-btn @click="signUp" dark v-on="on">Create</v-btn>
         </template>
         <v-card class="pa-10">
         <v-card-title class="headline">Create Acount</v-card-title>
 
-      <v-text-field
-        v-model="name"
-        :error-messages="nameErrors"
-        :counter="10"
-        label="ID"
+      <!--v-text-field
+        v-model="email"
+        :counter="20"
+        label="email"
         required
-        @input="$v.name.$touch()"
-        @blur="$v.name.$touch()"
       ></v-text-field>
       <v-text-field
-        v-model="email"
-        :error-messages="emailErrors"
+        v-model="Pass"
         label="Pass"
         required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
+      ></v-text-field-->
+    <input type="text" placeholder="Username" v-model="username" class="border2 pa-5">
+    <input type="password" placeholder="Password" v-model="password" class="border2 pa-5">
+
 
       <v-checkbox
         v-model="checkbox"
-        :error-messages="checkboxErrors"
         label="Do you agree?"
         required
-        @change="$v.checkbox.$touch()"
-        @blur="$v.checkbox.$touch()"
       ></v-checkbox>
 
 
@@ -94,7 +82,7 @@
     </v-parallax>
 
    <div>
-      <v-timeline :reverse="reverse" :dense="$vuetify.breakpoint.smAndDown">
+      <v-timeline :dense="$vuetify.breakpoint.smAndDown">
         <v-timeline-item
         v-for="(item, i) in items"
         :key="i"
@@ -122,16 +110,49 @@
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
+import firebase from '@firebase/app'; require('firebase/auth'); 
 export default {
-  data: () => ({
-dialog: false,
+  name: 'Sign',
+  data(){
+    return {
+      $v: '',
+      Pass: '',
+      ID: '',
+      username: '',
+      password: '',
+      email: '',
+      name: '',
+      checkbox: '',
+      dialog: false,
+      items: [
+        {color: 'light-blue darken-4', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！'},
+        {color: 'light-blue darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！'},
+      ],
+    };
+  },
 
-items: [
-  { color: 'red lighten-2', icon: 'mdi-star', title:'天候状況でアドバイス！', text:'現在地の天候状況に合わせて、Slackで出社する際のアドバイスをお届けします！',},
-  { color: 'purple darken-1', icon: 'mdi-book-variant', title:'メンバーの状況確認！', text:'アプリでメンバーの出社状況を確認します！',},
-],
-
-  }),
+  methods: {
+    signUp: function(){
+      firebase.auth().createUserWithEmailAndPassword(this.username, this.password)
+        .then(user => {
+          alert('Create account: ', user.email)
+      })
+      .catch(error => {
+        alert(error.message)
+      })
+   },
+    signIn: function () {
+      firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
+        user => {// eslint-disable-line
+          alert('Success!')
+          this.$router.push('/')
+        },
+        err => {
+          alert(err.message)
+        }
+      )
+    } 
+ }
 };
 
 </script>
@@ -139,7 +160,19 @@ items: [
 .form {
   border-radius: 20px 20px 20px 20px;
   background-color: rgba(255,255,255,0.5);
-  height: 300px;
+  height: 320px;
   box-shadow: 0px 0px 0px gray;
+}
+.border{
+  border: solid 1px #E1F5FE;
+  border-radius: 40px 40px 40px 40px;
+  width:100%;
+  margin:5px;
+}
+.border2{
+  border: solid 1px #B3E5FC;
+  border-radius: 40px 40px 40px 40px;
+  width:100%;
+  margin:5px;
 }
 </style>
