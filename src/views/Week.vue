@@ -14,6 +14,31 @@
         :items="results"
         :search="search"
       >
+      <template v-slot:item.today="{ item }">
+        <v-list-item-icon>
+          <v-icon>{{ getWhetherIcon(item.today) }}</v-icon>
+        </v-list-item-icon>
+      </template>
+      <template v-slot:item.dayOne="{ item }">
+        <v-list-item-icon>
+          <v-icon>{{ getWhetherIcon(item.dayOne) }}</v-icon>
+        </v-list-item-icon>
+      </template>
+      <template v-slot:item.dayTwo="{ item }">
+        <v-list-item-icon>
+          <v-icon>{{ getWhetherIcon(item.dayTwo) }}</v-icon>
+        </v-list-item-icon>
+      </template>
+      <template v-slot:item.dayThree="{ item }">
+        <v-list-item-icon>
+          <v-icon>{{ getWhetherIcon(item.dayThree) }}</v-icon>
+        </v-list-item-icon>
+      </template>
+      <template v-slot:item.dayFour="{ item }">
+        <v-list-item-icon>
+          <v-icon>{{ getWhetherIcon(item.dayFour) }}</v-icon>
+        </v-list-item-icon>
+      </template>
       </v-data-table>
     </div>
   </v-card>
@@ -38,21 +63,36 @@
           { text: '部署', align: 'center', value: 'group' },
           { text: '所在', align: 'center', value: 'city' },
           { text: TODAY, align: 'center', value: 'today' },
-          { text: DAY1, align: 'center', value: 'Day1' },
-          { text: DAY2, align: 'center', value: 'Day2' },
-          { text: DAY3, align: 'center', value: 'Day3' },
-          { text: DAY4, align: 'center', value: 'Day4' },
+          { text: DAY1, align: 'center', value: 'dayOne' },
+          { text: DAY2, align: 'center', value: 'dayTwo' },
+          { text: DAY3, align: 'center', value: 'dayThree' },
+          { text: DAY4, align: 'center', value: 'dayFour' },
         ],
         results: [
             {
-                id:"hundoshi",name:"ふんどし太郎",group:"新規事業部",city:"-",
-                today:"-",Day1:"-",Day2:"-",Day3:"-",Day4:"-"
+                id:"hundoshi",name:"ふんどし太郎",group:"新規事業部",postal:"825-0005",
+                city:"-",today:"Rain",dayOne:"Clouds",dayTwo:"Clear",dayThree:"Rain",dayFour:"Clouds"
+            },
+            {
+                id:"honda",name:"本田圭佑",group:"筋肉開発部",postal:"666-0022",
+                city:"-",today:"Rain",dayOne:"Clear",dayTwo:"Clear",dayThree:"Rain",dayFour:"Clouds"
             }
         ],
       }
     },
     mounted() {
-        console.log(moment().format('MM月DD日'));// eslint-disable-line
+        console.log(moment().format('MM月DD日'));　// eslint-disable-line
+    },
+    methods: {
+      getWhetherIcon(whether) {
+        return (
+            whether == "Clear"
+            ? `mdi-white-balance-sunny`
+            : whether == "Clouds"
+            ? `mdi-cloud`
+            : `mdi-weather-pouring`
+        );
+      },
     }
   }
 </script>
