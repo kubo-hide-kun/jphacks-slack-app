@@ -4,7 +4,7 @@
     <div class="p">
       <v-card id="create">
         <v-speed-dial 
-            v-model="fab"
+          v-model="fab"
           :top="top"
           :bottom="bottom"
           :right="right"

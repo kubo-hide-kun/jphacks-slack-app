@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app class="purple darken-4">
+    <v-app-bar app color="#3F0F40">
  
       <v-toolbar-title class="headline white--text center--text">
 
