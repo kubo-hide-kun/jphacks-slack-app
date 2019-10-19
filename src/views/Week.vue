@@ -16,27 +16,32 @@
       >
       <template v-slot:item.today="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWhetherIcon(item.today) }}</v-icon>
+          <v-icon>{{ getWeatherIcon(item.today) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayOne="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWhetherIcon(item.dayOne) }}</v-icon>
+          <v-icon>{{ getWeatherIcon(item.dayOne) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayTwo="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWhetherIcon(item.dayTwo) }}</v-icon>
+          <v-icon>{{ getWeatherIcon(item.dayTwo) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayThree="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWhetherIcon(item.dayThree) }}</v-icon>
+          <v-icon>{{ getWeatherIcon(item.dayThree) }}</v-icon>
         </v-list-item-icon>
       </template>
       <template v-slot:item.dayFour="{ item }">
         <v-list-item-icon>
-          <v-icon>{{ getWhetherIcon(item.dayFour) }}</v-icon>
+          <v-icon>{{ getWeatherIcon(item.dayFour) }}</v-icon>
+        </v-list-item-icon>
+      </template>
+      <template v-slot:item.dayFive="{ item }">
+        <v-list-item-icon>
+          <v-icon>{{ getWeatherIcon(item.dayFive) }}</v-icon>
         </v-list-item-icon>
       </template>
       </v-data-table>
@@ -51,10 +56,11 @@
     data() {
       const BASEDATA = moment();
       const TODAY= BASEDATA.format('MM月DD日');
-      const DAY1 = BASEDATA.add(1, 'days').format('MM月DD日')
-      const DAY2 = BASEDATA.add(2, 'days').format('MM月DD日')
-      const DAY3 = BASEDATA.add(3, 'days').format('MM月DD日')
-      const DAY4 = BASEDATA.add(4, 'days').format('MM月DD日')
+      const DAY1 = BASEDATA.add(1, 'days').format('MM月DD日');
+      const DAY2 = BASEDATA.add(2, 'days').format('MM月DD日');
+      const DAY3 = BASEDATA.add(3, 'days').format('MM月DD日');
+      const DAY4 = BASEDATA.add(4, 'days').format('MM月DD日');
+      const DAY5 = BASEDATA.add(4, 'days').format('MM月DD日');
       return {
         search: '',
         headers: [
@@ -67,24 +73,26 @@
           { text: DAY2, align: 'center', value: 'dayTwo' },
           { text: DAY3, align: 'center', value: 'dayThree' },
           { text: DAY4, align: 'center', value: 'dayFour' },
+          { text: DAY5, align: 'center', value: 'dayFive' },
         ],
         results: [
             {
                 id:"hundoshi",name:"ふんどし太郎",group:"新規事業部",postal:"825-0005",
-                city:"-",today:"Rain",dayOne:"Clouds",dayTwo:"Clear",dayThree:"Rain",dayFour:"Clouds"
+                city:"-",today:"Rain",dayOne:"Clouds",dayTwo:"Clear",dayThree:"Rain",dayFour:"Clouds",dayFive:"Rain"
             },
             {
-                id:"honda",name:"本田圭佑",group:"筋肉開発部",postal:"666-0022",
-                city:"-",today:"Rain",dayOne:"Clear",dayTwo:"Clear",dayThree:"Rain",dayFour:"Clouds"
+                id:"honda",name:"本田圭佑",group:"筋肉開発部",postal:"606-0022",
+                city:"-",today:"Rain",dayOne:"Clear",dayTwo:"Clear",dayThree:"Rain",dayFour:"Clouds",dayFive:"Clear"
             }
         ],
       }
     },
     mounted() {
-        console.log(moment().format('MM月DD日'));　// eslint-disable-line
+      this.fetchWeather(0);
+      this.fetchWeather(1);
     },
     methods: {
-      getWhetherIcon(whether) {
+      getWeatherIcon(whether) {
         return (
             whether == "Clear"
             ? `mdi-white-balance-sunny`
@@ -92,6 +100,17 @@
             ? `mdi-cloud`
             : `mdi-weather-pouring`
         );
+      },
+
+      fetchWeather(index) {
+        const sampledata = require('../../sampledata.json');
+        this.results[index].city = sampledata.city.name;
+        this.results[index].today = sampledata.list[0].weather[0].main;
+        this.results[index].dayOne = sampledata.list[8].weather[0].main;
+        this.results[index].dayTwo = sampledata.list[16].weather[0].main;
+        this.results[index].dayThree = sampledata.list[24].weather[0].main;
+        this.results[index].dayFour = sampledata.list[32].weather[0].main;
+        this.results[index].dayFive = sampledata.list[39].weather[0].main;
       },
     }
   }
