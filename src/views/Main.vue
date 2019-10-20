@@ -107,37 +107,91 @@ export default {
       ],
       results: [
         {
-          id: "hundoshi",
-          name: "ふんどし太郎",
+          id: "2019_ng",
+          name: "名古屋 太郎",
           group: "新規事業部",
-          postal: "825-0005",
+          postal: "466-0003",
           city: "-",
-          today: "Rain",
-          dayOne: "Clouds",
-          dayTwo: "Clear",
-          dayThree: "Rain",
-          dayFour: "Clouds",
-          dayFive: "Rain"
+          today: "-",
+          dayOne: "-",
+          dayTwo: "-",
+          dayThree: "-",
+          dayFour: "-",
+          dayFive: "-",
+          datas: "-"
         },
         {
-          id: "honda",
-          name: "本田圭佑",
-          group: "筋肉開発部",
-          postal: "606-0022",
+          id: "2019_kb",
+          name: "兵庫 小次郎",
+          group: "セキュリティ対策部",
+          postal: "651-0082",
           city: "-",
-          today: "Rain",
-          dayOne: "Clear",
-          dayTwo: "Clear",
-          dayThree: "Rain",
-          dayFour: "Clouds",
-          dayFive: "Clear"
+          today: "-",
+          dayOne: "-",
+          dayTwo: "-",
+          dayThree: "-",
+          dayFour: "-",
+          dayFive: "-",
+          datas: "-"
+        },
+        {
+          id: "2019_fk",
+          name: "ケースケ ホンダ",
+          group: "筋肉開発部",
+          postal: "812-0013",
+          city: "-",
+          today: "-",
+          dayOne: "-",
+          dayTwo: "-",
+          dayThree: "-",
+          dayFour: "-",
+          dayFive: "-",
+          datas: "-"
+        },
+        {
+          id: "2019_sd",
+          name: "東北太郎",
+          group: "サーバー保守/運用",
+          postal: "980-0845",
+          city: "-",
+          today: "-",
+          dayOne: "-",
+          dayTwo: "-",
+          dayThree: "-",
+          dayFour: "-",
+          dayFive: "-",
+          datas: "-"
+        },
+        {
+          id: "2019_ok",
+          name: "シーサー",
+          group: "人事部",
+          postal: "903-0129",
+          city: "-",
+          today: "-",
+          dayOne: "-",
+          dayTwo: "-",
+          dayThree: "-",
+          dayFour: "-",
+          dayFive: "-",
+          datas: "-"
         }
       ],
       isRestForm: false
     };
   },
   mounted() {
-    this.fetchWeather(0);
+    for(let i in this.results){
+      // console.log("http://api.openweathermap.org/data/2.5/forecast?zip="+this.results[i].postal+",jp&APPID=b3ac674f751354ffd6fee57b96afe842")// eslint-disable-line
+      fetch("http://api.openweathermap.org/data/2.5/forecast?zip="+this.results[i].postal+",jp&APPID=b3ac674f751354ffd6fee57b96afe842")
+        .then(r => r.json()).then(j => {this.results[i].datas = j});// eslint-disable-line
+    }
+    setInterval(() => {
+      for(let i in this.results){
+        if(this.results[i].datas === "-")continue;
+        this.fetchWeather(i,this.results[i].datas);
+        }
+      }, 500);
   },
   computed: {
     activeFab() {
@@ -173,15 +227,15 @@ export default {
         : "#28C9F7";
     },
 
-    fetchWeather(index) {
-      const sampledata = require("../../sampledata.json");
-      this.results[index].city = sampledata.city.name;
-      this.results[index].today = sampledata.list[0].weather[0].main;
-      this.results[index].dayOne = sampledata.list[8].weather[0].main;
-      this.results[index].dayTwo = sampledata.list[16].weather[0].main;
-      this.results[index].dayThree = sampledata.list[24].weather[0].main;
-      this.results[index].dayFour = sampledata.list[32].weather[0].main;
-      this.results[index].dayFive = sampledata.list[39].weather[0].main;
+    fetchWeather(index, data) {
+      // let data = require("../../sampledata.json");
+      this.results[index].city = data.city.name;
+      this.results[index].today = data.list[0].weather[0].main;
+      this.results[index].dayOne = data.list[8].weather[0].main;
+      this.results[index].dayTwo = data.list[16].weather[0].main;
+      this.results[index].dayThree = data.list[24].weather[0].main;
+      this.results[index].dayFour = data.list[32].weather[0].main;
+      this.results[index].dayFive = data.list[39].weather[0].main;
     }
   }
 };
