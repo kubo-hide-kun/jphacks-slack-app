@@ -41,7 +41,10 @@
           </v-data-table>
         </div>
       </v-card>
-      <DatePicker v-if="isRestForm" />
+      <div class="q">
+        <DatePicker v-if="isRestForm" />
+      </div>
+      <div class="back" v-if="isRestForm" v-on:click="isRestForm = false"/>
       <div class="p">
         <v-card id="create">
           <v-speed-dial
@@ -55,7 +58,7 @@
             :transition="transition"
           >
             <template v-slot:activator>
-              <v-btn v-model="fab" color="blue darken-2" dark fab v-on:click="isRestForm = false">
+              <v-btn v-model="fab" color="blue darken-2" dark fab>
                 <v-icon v-if="fab">mdi-close</v-icon>
                 <v-icon v-else>mdi-account-circle</v-icon>
               </v-btn>
@@ -252,5 +255,21 @@ export default {
   position: fixed;
   right: 100px;
   bottom: 100px;
+}
+.q {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1000;
+}
+.back {
+  position: absolute;
+  z-index: 500;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5)
 }
 </style>
