@@ -48,15 +48,72 @@ rtm.on('message', async (event) => {
     });
 
 
+    if (event.text === '社員の出席情報を教えて') {
+        try {
+            // Send a welcome message to the same channel where the new member just joined, and mention the user.
+            const reply = await rtm.sendMessage(`わかりました, <@${event.user}>さん`, event.channel);
+            rtm.sendMessage(`シキメグルさんは今日はお休みみたいです`, event.channel);
+            rtm.sendMessage(`せーとくさんは今日出社するようです`, event.channel);
+            //このしたに表を表示するもしくはウェブぺーじへのリンクを出させるコードをかく
+            console.log('Message sent successfully', reply.ts);
+            flag=0;
+        } catch (error) {
+            console.log('An error occurred', error);
+            flag=0;
+        }
+    }
+    
+    if (event.text === '災害状況を教えて') {
+        try {
+            // Send a welcome message to the same channel where the new member just joined, and mention the user.
+            const reply = await rtm.sendMessage(`<@${event.user}>さんの居住地で災害が発生しています。`, event.channel);
+            // rtm.sendMessage(``, event.channel);
+            console.log('Message sent successfully', reply.ts);
+            flag = 0;
+        } catch (error) {
+            console.log('An error occurred', error);
+            flag = 0;
+        }
+    }
+    
+    if (event.text === '会社周辺の警報を教えて') {
+        try {
+            const reply = await rtm.sendMessage(`現在会社周辺では大雨警報が発令中です。`, event.channel);
+            console.log('Message sent successfully', reply.ts);
+            flag=0;
+        } catch (error) {
+            console.log('An error occurred', error);
+            flag=0;
+        }
+    }
+    if (event.text === '台風の情報を教えて') {
+        try {
+            const reply = await rtm.sendMessage(`現在の台風情報をお知らせします。`, event.channel);
+            rtm.sendMessage(`非常に強い台風16号は20日2時には串間市付近の北緯31度10分、東経135度55分にあって1時間におよそ30キロの速さで進んでいます。`, event.channel);
+            console.log('Message sent successfully', reply.ts);
+            flag=0;
+        } catch (error) {
+            console.log('An error occurred', error);
+            flag=0;
+        }
+    }
 
-
-
+    if (event.text === '津波の情報を教えて') {
+        try {
+            const reply = await rtm.sendMessage(`津波の情報をお知らせします。`, event.channel);
+            rtm.sendMessage(`現在津波はありません。`, event.channel);
+            console.log('Message sent successfully', reply.ts);
+            flag=0;
+        } catch (error) {
+            console.log('An error occurred', error);
+            flag=0;
+        }
+    }
 
     if (event.text === '社員の状態を教えて') {
         try {
             // Send a welcome message to the same channel where the new member just joined, and mention the user.
             const reply = await rtm.sendMessage(`わかりました, <@${event.user}>さん`, event.channel);
-            //このしたに表を表示するもしくはウェブぺーじへのリンクを出させるコードをかくnpm install --save botkit cron
             //
             console.log('Message sent successfully', reply.ts);
             flag=0;
